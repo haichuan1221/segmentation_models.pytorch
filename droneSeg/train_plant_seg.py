@@ -110,7 +110,7 @@ MASK_PATH = "/home/haichuan/datasets/OAM-TCD/dataset/holdout/masks"
 train_dataset = PlatSegmentationData(image_dir=os.path.join(IMAGE_PATH,'train'), mask_dir=os.path.join(MASK_PATH,'train'),transform=t)
 val_dataset = PlatSegmentationData(image_dir=os.path.join(IMAGE_PATH,'val'), mask_dir=os.path.join(MASK_PATH,'val'),transform=t)
 
-batch_size = 2
+batch_size = 10
 train_dl = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True)
 val_dl = DataLoader(val_dataset, batch_size=batch_size, shuffle=True, pin_memory=True)
 
@@ -120,8 +120,8 @@ model = smp.DeepLabV3('resnet101', encoder_weights='imagenet', classes=n_classes
 
 
 
-LEARNING_RATE = 1e-4
-num_epochs = 20
+LEARNING_RATE = 5*1e-5
+num_epochs = 10
 
 loss_fn = nn.CrossEntropyLoss()
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
