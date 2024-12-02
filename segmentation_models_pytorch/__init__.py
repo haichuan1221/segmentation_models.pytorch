@@ -15,6 +15,7 @@ from .decoders.pspnet import PSPNet
 from .decoders.deeplabv3 import DeepLabV3, DeepLabV3Plus
 from .decoders.pan import PAN
 from .decoders.upernet import UPerNet
+from .decoders.segformer import Segformer
 from .base.hub_mixin import from_pretrained
 
 from .__version__ import __version__
@@ -25,6 +26,9 @@ import torch as _torch
 
 # Suppress the specific SyntaxWarning for `pretrainedmodels`
 warnings.filterwarnings("ignore", message="is with a literal", category=SyntaxWarning)
+warnings.filterwarnings(
+    "ignore", message=r'"is" with \'str\' literal.*', category=SyntaxWarning
+)  # for python >= 3.12
 
 
 def create_model(
@@ -50,6 +54,7 @@ def create_model(
         DeepLabV3Plus,
         PAN,
         UPerNet,
+        Segformer,
     ]
     archs_dict = {a.__name__.lower(): a for a in archs}
     try:
@@ -85,6 +90,7 @@ __all__ = [
     "DeepLabV3Plus",
     "PAN",
     "UPerNet",
+    "Segformer",
     "from_pretrained",
     "create_model",
     "__version__",
